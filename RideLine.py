@@ -29,10 +29,14 @@ class Line:
         self.size += 1;
 
     # removes the next person6 in the line
-    def clearNext(self):
+    def acceptNext(self):
         if(self.head != None):
-            self.size -= 1;
+            nextAccepted = self.head;
+            
             self.head = self.head.next;
+            self.size -= 1;
+
+            return nextAccepted;
 
     # prints the line
     def print(self):
@@ -47,11 +51,19 @@ class Line:
             
         print("[%s]-%s" % (_id, probe.name));
 
+def nInput(_input):
+    try:
+        return int(input(_input));
+    except:
+        return 0;
+
 # entry point
 def main():
     line = Line();
 
     running = True;
+
+    print("[Ride Line]");
     
     while running:
         # print menu
@@ -62,7 +74,7 @@ def main():
         print("");
 
         # ask for input        
-        userChoice = int(input(":"))
+        userChoice = nInput(":");
 
         # execute command
         if(userChoice == 1):
@@ -72,7 +84,11 @@ def main():
             line.add(Person(personName));
 
         if(userChoice == 2):
-            line.clearNext();
+           person = line.acceptNext();
+
+           if(person != None):
+               print("");
+               print("Now Accepting: %s" % person.name);
 
         if(userChoice == 3):
             line.print();
