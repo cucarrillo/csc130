@@ -31,20 +31,22 @@ class Line:
     # removes the next person6 in the line
     def clearNext(self):
         if(self.head != None):
+            returnString = self.head.name
             self.size -= 1;
             self.head = self.head.next;
+            return returnString
 
     # prints the line
     def print(self):
         _id = 1;
-        
+
         probe = self.head;
 
         while probe.next != None:
             print("[%s]-%s" % (_id, probe.name));
             _id += 1
             probe = probe.next;
-            
+
         print("[%s]-%s" % (_id, probe.name));
 
 # entry point
@@ -52,7 +54,7 @@ def main():
     line = Line();
 
     running = True;
-    
+
     while running:
         # print menu
         print("[1]: Add Person");
@@ -61,18 +63,18 @@ def main():
         print("[4]: Quit");
         print("");
 
-        # ask for input        
+        # ask for input
         userChoice = int(input(":"))
 
         # execute command
         if(userChoice == 1):
-            print("");
-            personName = input("Person name: ");
-            
+            print("")
+            personName = input("Person name: ")
+
             line.add(Person(personName));
 
         if(userChoice == 2):
-            line.clearNext();
+            print(line.clearNext(),"is now riding.")
 
         if(userChoice == 3):
             line.print();
